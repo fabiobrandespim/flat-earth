@@ -28,18 +28,18 @@ branco   = (255, 255, 255)
 azul     = (0, 0, 255)
 verde    = (0, 255, 0)
 
-
-pi = 3.141592653
+pi       = 3.141592653
 
 comprimento_ecra = 820
 altura_ecra      = 820
 ecra             = pygame.display.set_mode((comprimento_ecra, altura_ecra))
 
-xpos         = (comprimento_ecra)/2
-ypos         = (altura_ecra)/2
+xpos             = (comprimento_ecra)/2
+ypos             = (altura_ecra)/2
 
-raio_circulo = 15
-raio         = 100
+raio_circulo     = 15
+raio             = 100
+raio2            = 100
 
 
 #=================================
@@ -58,7 +58,7 @@ def sun(raio, pontocentral,graus):
    return (x, y)
 
 #================================
-def moon(raio, pontocentral,graus):
+def moon(raio, pontocentral, graus):
    rad = g2rad(graus+540);
    x = (math.cos(rad) * raio) + pontocentral;
    x = int(x)
@@ -70,18 +70,19 @@ def moon(raio, pontocentral,graus):
 #circ1   = pygame.draw.circle(ecra, vermelho, (50,180), raio_circulo, 0)
 #circ2   = pygame.draw.circle(ecra, vermelho, (130,180), raio_circulo, 3)
 
-
-pygame.display.set_caption('Flat Earth')
+pygame.display.set_caption('Flat Earth by   Fabio Brandespim  03-19-2016  +55 62 91909935')
 
 pygame.display.flip()
 
 pygame.key.set_repeat(100, 100)
 
-graus = 0
+graus  = 0
+graus2 = 0
 
-subindo = True
+subindo  = True
+subindo2 = True
 
-cont = 1
+volta = 1
 
 while True:
     for event in pygame.event.get():
@@ -95,23 +96,46 @@ while True:
     if tecla_pressionada[K_ESCAPE]:
         break
 
-    graus += 1
 
+    #===================================
+    graus2 += 9.7055555
+    if graus2 > 360:
+        graus2 = 1
+        if subindo2:
+          if raio2 < 300:
+             raio2 += 15
+          else:
+             subindo2 = False
+        else:
+          if raio2 > 100:
+            raio2 -= 15
+          else:
+            subindo2 = True
+    x2, y2 = moon(raio2, 410, graus2)
+
+    #===================================
+    graus += 10
     if graus > 360:
+        print(volta)
         graus = 1
         if subindo:
           if raio < 300:
              raio += 10
+             volta = volta + 1
+             if volta > 30:
+                volta = 1
+
           else:
              subindo = False
         else:
           if raio > 100:
             raio -= 10
+            volta = volta + 1
+            if volta > 30:
+               volta = 1
           else:
             subindo = True
-
-    x1, y1 = sun(raio, 410, graus)
-    x2, y2 = moon(raio, 410, graus)
+    x1, y1 = sun(raio,  410, graus)
 
 
 
