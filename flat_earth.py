@@ -1,3 +1,9 @@
+"""
+Author: Fabio Brandespim
+Location: Brazil - Goiania
+09-19-2016
+"""
+
 #!/usr/bin/env python
 #https://kaleu.wordpress.com/2011/06/23/posicionamento-em-circulo-javascript/
 
@@ -38,8 +44,8 @@ xpos             = (comprimento_ecra)/2
 ypos             = (altura_ecra)/2
 
 raio_circulo     = 15
-raio             = 100
-raio2            = 100
+raio             = 130
+raio2            = 130
 
 
 #=================================
@@ -59,16 +65,16 @@ def sun(raio, pontocentral,graus):
 
 #================================
 def moon(raio, pontocentral, graus):
-   rad = g2rad(graus+540);
+   rad = g2rad(graus);
    x = (math.cos(rad) * raio) + pontocentral;
    x = int(x)
    y = (math.sin(rad) * raio) + pontocentral;
    y = int(y)
    return (x, y)
 
-#circulo = pygame.draw.circle(ecra, vermelho, (a, b), raio_circulo)
-#circ1   = pygame.draw.circle(ecra, vermelho, (50,180), raio_circulo, 0)
-#circ2   = pygame.draw.circle(ecra, vermelho, (130,180), raio_circulo, 3)
+#circulo = pygame.draw.circle(ecra, amarelo, (410, 410), 100,1)
+#circulo = pygame.draw.circle(ecra, amarelo, (410, 410), 200,1)
+#circulo = pygame.draw.circle(ecra, amarelo, (410, 410), 300,1)
 
 pygame.display.set_caption('Flat Earth by   Fabio Brandespim  03-19-2016  +55 62 91909935')
 
@@ -82,7 +88,7 @@ graus2 = 0
 subindo  = True
 subindo2 = True
 
-volta = 1
+volta = 0
 
 while True:
     for event in pygame.event.get():
@@ -98,37 +104,20 @@ while True:
 
 
     #===================================
-    graus2 += 9.7055555
-    if graus2 > 360:
-        graus2 = 1
-        if subindo2:
-          if raio2 < 300:
-             raio2 += 15
-          else:
-             subindo2 = False
-        else:
-          if raio2 > 100:
-            raio2 -= 15
-          else:
-            subindo2 = True
-    x2, y2 = moon(raio2, 410, graus2)
-
-    #===================================
-    graus += 10
+    graus += 1
     if graus > 360:
         print(volta)
         graus = 1
         if subindo:
-          if raio < 300:
+          if raio < 270:
              raio += 10
              volta = volta + 1
              if volta > 30:
                 volta = 1
-
           else:
              subindo = False
         else:
-          if raio > 100:
+          if raio > 130:
             raio -= 10
             volta = volta + 1
             if volta > 30:
@@ -138,10 +127,29 @@ while True:
     x1, y1 = sun(raio,  410, graus)
 
 
+    #===================================
+    graus2 += 0.7055555
+    if graus2 > 360:
+        graus2 = 1
+        if subindo2:
+          if raio2 < 270:
+             raio2 += 10
+          else:
+             subindo2 = False
+        else:
+          if raio2 > 130:
+            raio2 -= 10
+          else:
+            subindo2 = True
+    x2, y2 = moon(raio2, 410, graus2)
+
+
 
     #ecra.fill(preto)
-    sol = pygame.draw.circle(ecra, amarelo, (x1, y1), raio_circulo)
-    lua = pygame.draw.circle(ecra, azul, (x2, y2), raio_circulo)
+    sun_shadow  = pygame.draw.circle(ecra, amarelo, (x1, y1), 135,1)
+    sun2  = pygame.draw.circle(ecra, amarelo, (x1, y1), raio_circulo)
+    #moon_shadow = pygame.draw.circle(ecra, branco, (x2, y2), 135,1)
+    moon2 = pygame.draw.circle(ecra, branco, (x2, y2), raio_circulo)
     pygame.display.flip()
 
     pygame.time.delay(1)
@@ -149,12 +157,17 @@ while True:
     ecra.blit(img,(0,0))
     #pygame.display.flip()
 
-    pygame.draw.line(ecra, vermelho, [410, 0], [410, 820], 1)
-    pygame.draw.line(ecra, vermelho, [0, 410], [820, 410], 1)
-    circulo = pygame.draw.circle(ecra, amarelo, (410, 410), 100,1)
-    circulo = pygame.draw.circle(ecra, amarelo, (410, 410), 200,1)
-    circulo = pygame.draw.circle(ecra, amarelo, (410, 410), 300,1)
+    pygame.draw.line(ecra, branco, [410, 0], [410, 820], 1)
+    pygame.draw.line(ecra, branco, [0, 410], [820, 410], 1)
 
-    #circulo azul no centro
-    my_first_particle = Particle.Particle((410, 410), 5)
-    my_first_particle.display()
+    tropico_capricornio = Particle.Particle((410, 410), 270)
+    tropico_capricornio.display()
+
+    equador = Particle.Particle((410, 410), 200)
+    equador.display()
+
+    tropico_cancer = Particle.Particle((410, 410), 130)
+    tropico_cancer.display()
+
+    polo_norte = Particle.Particle((410, 410), 5)
+    polo_norte.display()
