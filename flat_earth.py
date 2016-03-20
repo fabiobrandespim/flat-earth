@@ -104,7 +104,7 @@ while True:
 
 
     #===================================
-    graus += 1
+    graus += 10
     if graus > 360:
         print(volta)
         graus = 1
@@ -128,7 +128,7 @@ while True:
 
 
     #===================================
-    graus2 += 0.7055555
+    graus2 += 9.7055555
     if graus2 > 360:
         graus2 = 1
         if subindo2:
