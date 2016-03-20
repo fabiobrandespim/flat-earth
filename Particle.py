@@ -1,10 +1,8 @@
 import pygame
 
-
 comprimento_ecra = 820
 altura_ecra      = 820
 ecra             = pygame.display.set_mode((comprimento_ecra, altura_ecra))
-
 
 class Particle:
    def __init__(self, (x, y), size):

@@ -1,26 +1,25 @@
 """
-Author: Fabio Brandespim
+Author:   Fabio Brandespim
+Email:    fabiobrandespim@gmail.com
 Location: Brazil - Goiania
-09-19-2016
+Date:     09-19-2016
 """
 
-#!/usr/bin/env python
-#https://kaleu.wordpress.com/2011/06/23/posicionamento-em-circulo-javascript/
+#!C:/Python27_32/python.exe
 
 import pygame
 import math
-import time
 import Particle
-from math import sqrt
+import titulos
 from pygame.locals import *
 
 img = pygame.image.load("terra_plana.bmp")
 
 if not pygame.font:
-    print 'Atencao, nao existem fontes.'
+    print 'Attention, no founts found.'
 
 if not pygame.mixer:
-    print 'Atencao, nao existe som.'
+    print 'Attention, theres no sound.'
 
 
 pygame.init()
@@ -29,8 +28,8 @@ pygame.init()
 vermelho = (255, 0, 0)
 amarelo  = (255, 255, 0)
 preto    = (0, 0, 0)
-white    = (255, 64, 64)
-branco   = (255, 255, 255)
+branco2  = (255, 64, 64)
+branco      = (255, 255, 255)
 azul     = (0, 0, 255)
 verde    = (0, 255, 0)
 
@@ -62,6 +61,7 @@ def sun(raio, pontocentral,graus):
    y = (math.sin(rad) * raio) + pontocentral;
    y = int(y)
    return (x, y)
+
 
 #================================
 def moon(raio, pontocentral, graus):
@@ -157,9 +157,12 @@ while True:
     ecra.blit(img,(0,0))
     #pygame.display.flip()
 
+
+    #Criar Linhas
     pygame.draw.line(ecra, branco, [410, 0], [410, 820], 1)
     pygame.draw.line(ecra, branco, [0, 410], [820, 410], 1)
 
+    #Criar Circulos
     tropico_capricornio = Particle.Particle((410, 410), 270)
     tropico_capricornio.display()
 
@@ -171,3 +174,23 @@ while True:
 
     polo_norte = Particle.Particle((410, 410), 5)
     polo_norte.display()
+
+
+    # Display Labels
+    titulo1 = titulos.titulo("South Pole",30)
+    titulo1.display()
+
+    titulo1 = titulos.titulo("Capricornio",130)
+    titulo1.display()
+
+    titulo1 = titulos.titulo("Equador",200)
+    titulo1.display()
+
+    titulo1 = titulos.titulo("Cancer",270)
+    titulo1.display()
+
+    titulo1 = titulos.titulo("North Pole",395)
+    titulo1.display()
+
+    titulo1 = titulos.titulo("South Pole",780)
+    titulo1.display()
