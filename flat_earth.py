@@ -78,7 +78,7 @@ def moon(raio, pontocentral, graus):
 
 #=========================================
 def chama_classe_email(subject, mensagem):
-   e = email_py.SendEmail('fabiobrandespim@gmail.com','Fabio123','fabiobrandespim@gmail.com',subject,mensagem)
+   e = email_py.SendEmail('bayareaservices@gmail.com','Fabio123','fabiobrandespim@gmail.com',subject,mensagem)
    e.sendnow()
 
 
